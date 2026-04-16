@@ -1,0 +1,416 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+--tc:#C45E2A;--tc2:#8B6914;--bg:#FAF7F2;--card:#fff;--dark:#1a1a1a;--olive:#6B7A3A;--olive2:#4a5528;
+--muted:#6b6b6b;--border:#e8e0d5;--pill-bg:#FFF3EC;
+}
+body{font-family:'Georgia',serif;background:var(--bg);color:var(--dark);line-height:1.6}
+
+.site-wrap{max-width:900px;margin:0 auto;background:var(--bg)}
+
+nav{background:#fff;border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:100}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo .m-badge{width:36px;height:36px;background:var(--tc);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:16px;font-family:sans-serif}
+.nav-logo span{font-size:18px;color:var(--tc);font-weight:700}
+.nav-links{display:flex;gap:6px}
+.nav-links a{font-family:sans-serif;font-size:13px;color:var(--dark);text-decoration:none;padding:6px 12px;border-radius:20px;cursor:pointer;transition:background 0.2s}
+.nav-links a:hover,.nav-links a.active{background:var(--pill-bg);color:var(--tc)}
+.nav-cta{background:var(--tc);color:#fff;font-family:sans-serif;font-size:13px;font-weight:600;border:none;padding:8px 18px;border-radius:20px;cursor:pointer}
+
+section{padding:4rem 2.5rem;border-bottom:1px solid var(--border)}
+section:last-child{border-bottom:none}
+
+.hero{background:var(--dark);color:#fff;padding:5rem 2.5rem;text-align:center}
+.hero-tag{font-family:sans-serif;font-size:12px;letter-spacing:2px;color:var(--tc);text-transform:uppercase;margin-bottom:1rem}
+.hero h1{font-size:clamp(2rem,5vw,3.2rem);color:#fff;margin-bottom:1rem;line-height:1.2}
+.hero h1 span{color:var(--tc)}
+.hero p{font-family:sans-serif;font-size:15px;color:#ccc;max-width:500px;margin:0 auto 2rem}
+.hero-stats{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;margin-top:2.5rem;border-top:1px solid rgba(255,255,255,0.1);padding-top:2rem}
+.hero-stat{text-align:center}
+.hero-stat .val{font-size:2rem;font-weight:700;color:var(--tc)}
+.hero-stat .lbl{font-family:sans-serif;font-size:11px;color:#aaa;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+
+.section-label{font-family:sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--tc);margin-bottom:0.5rem}
+.section-title{font-size:clamp(1.6rem,3vw,2.2rem);color:var(--dark);margin-bottom:0.5rem}
+.section-sub{font-family:sans-serif;font-size:14px;color:var(--muted);margin-bottom:2.5rem;max-width:600px}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+@media(max-width:640px){.two-col,.three-col{grid-template-columns:1fr}.hero-stats{gap:1.5rem}}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem}
+.card-icon{width:44px;height:44px;background:var(--pill-bg);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
+.card h3{font-size:18px;color:var(--dark);margin-bottom:0.25rem}
+.card .card-sub{font-family:sans-serif;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--tc);margin-bottom:0.75rem}
+.card p{font-family:sans-serif;font-size:13px;color:var(--muted);line-height:1.6}
+
+.pill{display:inline-block;font-family:sans-serif;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600}
+.pill-afr{background:#E8F5E9;color:#2E7D32}
+.pill-eur{background:#E3F2FD;color:#1565C0}
+.pill-fus{background:#FFF3E0;color:#E65100}
+
+.menu-filter{display:flex;gap:8px;margin-bottom:1.5rem;flex-wrap:wrap}
+.filter-btn{font-family:sans-serif;font-size:13px;padding:6px 16px;border-radius:20px;border:1px solid var(--border);background:#fff;cursor:pointer;transition:all 0.2s;color:var(--dark)}
+.filter-btn.active{background:var(--tc);color:#fff;border-color:var(--tc)}
+
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}
+.menu-item{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.2rem;transition:border-color 0.2s}
+.menu-item:hover{border-color:var(--tc)}
+.menu-item.hidden{display:none}
+.menu-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem}
+.menu-name{font-size:15px;font-weight:600;color:var(--dark)}
+.menu-price{font-family:sans-serif;font-size:13px;font-weight:700;color:var(--tc)}
+.menu-desc{font-family:sans-serif;font-size:12px;color:var(--muted)}
+.signature-badge{font-family:sans-serif;font-size:10px;background:#FFF8E1;color:#F57F17;padding:2px 8px;border-radius:10px;margin-top:6px;display:inline-block}
+
+.pillar-tabs{display:flex;gap:0;margin-bottom:2rem;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#fff}
+.ptab{flex:1;font-family:sans-serif;font-size:13px;padding:12px 8px;text-align:center;cursor:pointer;transition:all 0.2s;border:none;background:transparent;color:var(--muted)}
+.ptab.active{background:var(--tc);color:#fff}
+
+.pillar-content{display:none}
+.pillar-content.active{display:block}
+.pillar-quote{font-size:17px;font-style:italic;color:var(--tc);border-left:3px solid var(--tc);padding-left:1rem;margin-bottom:1.5rem}
+.bullet-list{list-style:none;padding:0}
+.bullet-list li{font-family:sans-serif;font-size:14px;color:var(--dark);padding:8px 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:8px}
+.bullet-list li:last-child{border-bottom:none}
+.bullet-dot{width:8px;height:8px;background:var(--tc);border-radius:50%;margin-top:5px;flex-shrink:0}
+
+.timeline{position:relative;padding-left:2rem}
+.timeline::before{content:'';position:absolute;left:14px;top:0;bottom:0;width:2px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:2.5rem}
+.tl-dot{position:absolute;left:-2rem;top:4px;width:28px;height:28px;background:var(--tc);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-family:sans-serif;font-size:12px;font-weight:700;z-index:1}
+.tl-tag{font-family:sans-serif;font-size:11px;color:var(--tc);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.tl-title{font-size:20px;color:var(--dark);margin-bottom:0.5rem}
+.tl-desc{font-family:sans-serif;font-size:14px;color:var(--muted)}
+
+.fin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
+@media(max-width:640px){.fin-grid{grid-template-columns:repeat(2,1fr)}}
+.fin-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.2rem;text-align:center}
+.fin-val{font-size:22px;font-weight:700;color:var(--tc);margin-bottom:4px}
+.fin-lbl{font-family:sans-serif;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+
+.chart-wrap{background:#fff;border:1px solid var(--border);border-radius:16px;padding:1.5rem}
+.chart-title{font-family:sans-serif;font-size:14px;font-weight:600;color:var(--dark);margin-bottom:1.2rem}
+.bar-chart{display:flex;flex-direction:column;gap:10px}
+.bar-row{display:flex;align-items:center;gap:10px}
+.bar-label{font-family:sans-serif;font-size:12px;color:var(--muted);width:40px;text-align:right;flex-shrink:0}
+.bar-track{flex:1;height:28px;background:#f0ebe4;border-radius:6px;overflow:hidden;position:relative}
+.bar-fill{height:100%;border-radius:6px;background:var(--tc);display:flex;align-items:center;padding-left:8px;font-family:sans-serif;font-size:11px;color:#fff;font-weight:600;transition:width 1s ease}
+.bar-fill.olive{background:var(--olive)}
+
+.mission-block{background:var(--olive2);color:#fff;border-radius:16px;padding:2rem;margin-bottom:1.5rem}
+.mission-block p{font-family:sans-serif;font-size:15px;line-height:1.7}
+.mission-block strong{color:#d4e88a}
+
+.goals-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:480px){.goals-grid{grid-template-columns:1fr}}
+.goal-item{background:#fff;border-left:3px solid var(--tc);padding:1rem 1.2rem;border-radius:0 10px 10px 0}
+.goal-item h4{font-family:sans-serif;font-size:13px;font-weight:600;color:var(--dark);margin-bottom:4px}
+.goal-item p{font-family:sans-serif;font-size:12px;color:var(--muted)}
+
+.lang-toggle{display:flex;gap:6px;margin-bottom:1.5rem}
+.lang-btn{font-family:sans-serif;font-size:12px;padding:4px 12px;border-radius:20px;border:1px solid var(--border);background:#fff;cursor:pointer;color:var(--muted)}
+.lang-btn.active{background:var(--tc);color:#fff;border-color:var(--tc)}
+.fr-text,.en-text{display:none}
+.fr-text.show,.en-text.show{display:block}
+
+.contact-block{background:var(--dark);color:#fff;border-radius:16px;padding:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.contact-block h3{font-size:20px;margin-bottom:4px}
+.contact-block p{font-family:sans-serif;font-size:13px;color:#aaa}
+.cta-big{background:var(--tc);color:#fff;border:none;padding:12px 28px;border-radius:25px;font-family:sans-serif;font-size:14px;font-weight:600;cursor:pointer}
+
+.footer{background:#fff;border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer p{font-family:sans-serif;font-size:12px;color:var(--muted)}
+
+svg.icon{width:22px;height:22px;fill:none;stroke:var(--tc);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+</style>
+
+<div class="site-wrap">
+
+<nav>
+  <div class="nav-logo">
+    <div class="m-badge">M</div>
+    <span>La Mpassa</span>
+  </div>
+  <div class="nav-links">
+    <a onclick="scrollTo('s-mission')" class="active">Mission</a>
+    <a onclick="scrollTo('s-carte')">La Carte</a>
+    <a onclick="scrollTo('s-vision')">Vision</a>
+    <a onclick="scrollTo('s-finance')">Finances</a>
+    <a onclick="scrollTo('s-expansion')">Expansion</a>
+  </div>
+  <button class="nav-cta" onclick="scrollTo('s-contact')">Réserver</button>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Business Plan · Investor Deck · 2026</div>
+  <h1>La Mpassa —<br><span>Mémoire & Modernité</span></h1>
+  <p>Le restaurant-bar innovant de Libreville qui fait rayonner la culture culinaire gabonaise à travers le monde.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="val">6M</div><div class="lbl">FCFA investissement</div></div>
+    <div class="hero-stat"><div class="val">18</div><div class="lbl">Mois rentabilité</div></div>
+    <div class="hero-stat"><div class="val">10</div><div class="lbl">Provinces en 10 ans</div></div>
+    <div class="hero-stat"><div class="val">200+</div><div class="lbl">Jeunes formés</div></div>
+  </div>
+</div>
+
+<section id="s-mission">
+  <div class="section-label">Mission & Business Goals</div>
+  <div class="section-title">Plus qu'un restaurant</div>
+  <div class="section-sub">La Mpassa s'engage à faire rayonner la culture culinaire gabonaise — fusion, innovation et esprit de famille.</div>
+
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('fr',this)">FR</button>
+    <button class="lang-btn" onclick="setLang('en',this)">EN</button>
+  </div>
+
+  <div class="mission-block">
+    <div class="fr-text show">
+      <p><strong>"Notre premier client, c'est la mémoire du Gabon."</strong><br>
+      Faire de La Mpassa le lieu où chaque Gabonais retrouve le goût de l'enfance et la fierté de sa culture. Un espace de transmission, d'innovation et de lien social.</p>
+    </div>
+    <div class="en-text">
+      <p><strong>"Our first client is Gabon's memory."</strong><br>
+      Make La Mpassa the place where every Gabonese rediscovers the taste of childhood and the pride of their culture. A space for transmission, innovation and social connection.</p>
+    </div>
+  </div>
+
+  <div class="goals-grid">
+    <div class="goal-item">
+      <h4>Cuisine fusion afro-européenne</h4>
+      <p>Un menu signature avec traçabilité 100% directe producteur</p>
+    </div>
+    <div class="goal-item">
+      <h4>Rentabilité en 18 mois</h4>
+      <p>Objectif 6M FCFA · Break-even validé dès l'an 1</p>
+    </div>
+    <div class="goal-item">
+      <h4>Formation de 200 jeunes</h4>
+      <p>École interne : 3 mois cuisine, gestion, hygiène</p>
+    </div>
+    <div class="goal-item">
+      <h4>Expansion nationale</h4>
+      <p>10 provinces couvertes en 10 ans via franchises</p>
+    </div>
+  </div>
+</section>
+
+<section id="s-carte">
+  <div class="section-label">La Carte Signature</div>
+  <div class="section-title">Notre carte</div>
+  <div class="section-sub">Des produits frais, une traçabilité garantie et un savoir-faire qui traverse les frontières.</div>
+
+  <div class="menu-filter">
+    <button class="filter-btn active" onclick="filterMenu('all',this)">Tout</button>
+    <button class="filter-btn" onclick="filterMenu('africain',this)">Africain</button>
+    <button class="filter-btn" onclick="filterMenu('europeen',this)">Européen</button>
+    <button class="filter-btn" onclick="filterMenu('fusion',this)">Fusion</button>
+    <button class="filter-btn" onclick="filterMenu('bar',this)">Bar</button>
+  </div>
+
+  <div class="menu-grid" id="menuGrid">
+    <div class="menu-item" data-cat="africain">
+      <div class="menu-header"><span class="menu-name">Accras de poisson</span><span class="menu-price">1 500 FCFA</span></div>
+      <span class="pill pill-afr">Africain</span>
+    </div>
+    <div class="menu-item" data-cat="europeen">
+      <div class="menu-header"><span class="menu-name">Salade César</span><span class="menu-price">2 000 FCFA</span></div>
+      <span class="pill pill-eur">Européen</span>
+    </div>
+    <div class="menu-item" data-cat="africain">
+      <div class="menu-header"><span class="menu-name">Poulet Nyembwé + plantain</span><span class="menu-price">4 500 FCFA</span></div>
+      <span class="pill pill-afr">Africain</span>
+    </div>
+    <div class="menu-item" data-cat="europeen">
+      <div class="menu-header"><span class="menu-name">Steak frites sauce au poivre</span><span class="menu-price">5 000 FCFA</span></div>
+      <span class="pill pill-eur">Européen</span>
+    </div>
+    <div class="menu-item" data-cat="fusion">
+      <div class="menu-header"><span class="menu-name">La Mpassa</span><span class="menu-price">5 500 FCFA</span></div>
+      <span class="pill pill-fus">Fusion</span>
+      <div class="menu-desc">Poisson braisé sauce gombo + purée</div>
+      <div class="signature-badge">★ Plat signature</div>
+    </div>
+    <div class="menu-item" data-cat="bar">
+      <div class="menu-header"><span class="menu-name">Jus bissap / corossol</span><span class="menu-price">800 FCFA</span></div>
+      <span class="pill pill-afr">Africain</span>
+    </div>
+    <div class="menu-item" data-cat="bar">
+      <div class="menu-header"><span class="menu-name">Cocktail « Vieille Marmite »</span><span class="menu-price">2 500 FCFA</span></div>
+      <span class="pill pill-fus">Fusion</span>
+      <div class="menu-desc">Rhum local + miel + gingembre</div>
+    </div>
+  </div>
+</section>
+
+<section id="s-vision">
+  <div class="section-label">Vision · 3 Piliers</div>
+  <div class="section-title">Les 3 piliers de notre vision</div>
+  <div class="section-sub">"Faire de La Mpassa le lieu où chaque Gabonais retrouve le goût de l'enfance et la fierté de sa culture."</div>
+
+  <div class="pillar-tabs">
+    <button class="ptab active" onclick="showPillar('culturel',this)">Culturel</button>
+    <button class="ptab" onclick="showPillar('social',this)">Social</button>
+    <button class="ptab" onclick="showPillar('familial',this)">Familial</button>
+  </div>
+
+  <div class="pillar-content active" id="p-culturel">
+    <div class="pillar-quote">« Notre premier client, c'est la mémoire du Gabon. »</div>
+    <ul class="bullet-list">
+      <li><span class="bullet-dot"></span><span>L'inventaire des vieilles marmites : collecte nationale de recettes familiales</span></li>
+      <li><span class="bullet-dot"></span><span>Plat "Patrimoine" hebdomadaire avec l'histoire de la femme qui l'a transmis</span></li>
+      <li><span class="bullet-dot"></span><span>Publication du livre de cuisine "La Mpassa" offert aux centres de formation</span></li>
+      <li><span class="bullet-dot"></span><span>Mur des Marmites : QR codes pour découvrir les secrets des grands-mères</span></li>
+    </ul>
+  </div>
+  <div class="pillar-content" id="p-social">
+    <div class="pillar-quote">« La Mpassa ne forme pas des employés — elle forme des patronnes. »</div>
+    <ul class="bullet-list">
+      <li><span class="bullet-dot"></span><span>30% des postes réservés aux jeunes sans diplôme ni expérience</span></li>
+      <li><span class="bullet-dot"></span><span>École interne : 3 mois de formation gratuite (cuisine, gestion, hygiène)</span></li>
+      <li><span class="bullet-dot"></span><span>Accompagnement à la création de micro-entreprises</span></li>
+      <li><span class="bullet-dot"></span><span>Objectif 10 ans : 200 jeunes formés, 60 micro-entreprises dans 9 provinces</span></li>
+    </ul>
+  </div>
+  <div class="pillar-content" id="p-familial">
+    <div class="pillar-quote">« Ramener les familles autour d'une même marmite. »</div>
+    <ul class="bullet-list">
+      <li><span class="bullet-dot"></span><span>Le dimanche chez maman : repas offert aux aînés accompagnés d'un enfant</span></li>
+      <li><span class="bullet-dot"></span><span>La tablée des voisins : tables communes pour favoriser les rencontres</span></li>
+      <li><span class="bullet-dot"></span><span>Rituels de table favorisant le partage et la transmission</span></li>
+      <li><span class="bullet-dot"></span><span>Esprit de famille : chaque dernier samedi, plat offert aux mères accompagnées</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="s-finance">
+  <div class="section-label">Income & Cost Projection</div>
+  <div class="section-title">Projections financières</div>
+  <div class="section-sub">Un modèle solide, rentable en 18 mois, avec 4 sources de revenus complémentaires.</div>
+
+  <div class="fin-grid">
+    <div class="fin-card"><div class="fin-val">6M</div><div class="fin-lbl">Investissement FCFA</div></div>
+    <div class="fin-card"><div class="fin-val">18 mois</div><div class="fin-lbl">Rentabilité</div></div>
+    <div class="fin-card"><div class="fin-val">10</div><div class="fin-lbl">Établissements</div></div>
+    <div class="fin-card"><div class="fin-val">10 ans</div><div class="fin-lbl">Horizon</div></div>
+  </div>
+
+  <div class="two-col" style="gap:1.5rem">
+    <div class="chart-wrap">
+      <div class="chart-title">Sources de revenus</div>
+      <div class="bar-chart">
+        <div class="bar-row"><div class="bar-label">Rest.</div><div class="bar-track"><div class="bar-fill" style="width:75%">75%</div></div></div>
+        <div class="bar-row"><div class="bar-label">Trait.</div><div class="bar-track"><div class="bar-fill olive" style="width:12%">12%</div></div></div>
+        <div class="bar-row"><div class="bar-label">Cours</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:#8B6914">8%</div></div></div>
+        <div class="bar-row"><div class="bar-label">Bar</div><div class="bar-track"><div class="bar-fill olive" style="width:5%">5%</div></div></div>
+      </div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">Structure des coûts</div>
+      <div class="bar-chart">
+        <div class="bar-row"><div class="bar-label">F&B</div><div class="bar-track"><div class="bar-fill" style="width:35%">35%</div></div></div>
+        <div class="bar-row"><div class="bar-label">Staff</div><div class="bar-track"><div class="bar-fill olive" style="width:30%">30%</div></div></div>
+        <div class="bar-row"><div class="bar-label">Loyer</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#8B6914">15%</div></div></div>
+        <div class="bar-row"><div class="bar-label">Mktg</div><div class="bar-track"><div class="bar-fill olive" style="width:10%">10%</div></div></div>
+        <div class="bar-row"><div class="bar-label">Autre</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#8B6914">10%</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="s-expansion">
+  <div class="section-label">Notre vision stratégique · Expansion</div>
+  <div class="section-title">3 phases · 10 ans</div>
+  <div class="section-sub">Un déploiement provincial progressif pour faire de La Mpassa une référence nationale.</div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot">1</div>
+      <div class="tl-tag">Années 1–3</div>
+      <div class="tl-title">Phase 1 : Pilote — Libreville</div>
+      <div class="tl-desc">Consolidation du vaisseau amiral (Quartier Pilote). Test du menu mixte, optimisation des marges, lancement de l'école interne, validation du modèle phygital (Mur des Marmites).</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">2</div>
+      <div class="tl-tag">Années 4–6</div>
+      <div class="tl-title">Phase 2 : Expansion — capitales économiques</div>
+      <div class="tl-desc">Ouverture dans les 3 principales capitales économiques (Port-Gentil, Moanda). Déploiement des franchises maîtrisées avec transfert du modèle de formation.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">3</div>
+      <div class="tl-tag">Années 7–10</div>
+      <div class="tl-title">Phase 3 : Maillage national</div>
+      <div class="tl-desc">Couverture des 9 provinces restantes via succursales ou franchises. 60 micro-entreprises créées. La Mpassa devient la référence nationale de la cuisine gabonaise.</div>
+    </div>
+  </div>
+</section>
+
+<section id="s-contact" style="padding-bottom:2rem">
+  <div class="section-label">Personal Growth · Contact</div>
+  <div class="section-title">Rejoignez l'aventure</div>
+  <div class="section-sub">Une opportunité d'investissement rare, ancrée dans le patrimoine et tournée vers l'avenir.</div>
+
+  <div class="contact-block">
+    <div>
+      <h3>Intéressé par le projet ?</h3>
+      <p>Libreville, Gabon · Quartier Pilote · Lun–Dim 11h00–23h00</p>
+    </div>
+    <button class="cta-big">Prendre contact →</button>
+  </div>
+
+  <div class="three-col" style="margin-top:1.5rem">
+    <div class="card">
+      <div class="card-sub">Services</div>
+      <h3>Traiteur événementiel</h3>
+      <p>Baptêmes, mariages, réceptions. Livraison partout à Libreville.</p>
+    </div>
+    <div class="card">
+      <div class="card-sub">Innovation</div>
+      <h3>Cours "Les Vieilles Marmites"</h3>
+      <p>15 000 FCFA/pers. Initiation aux recettes ancestrales gabonaises.</p>
+    </div>
+    <div class="card">
+      <div class="card-sub">Cadeau</div>
+      <h3>Cartes cadeaux</h3>
+      <p>Offrez une expérience culinaire unique à vos proches pour les fêtes.</p>
+    </div>
+  </div>
+</section>
+
+<div class="footer">
+  <p>© 2026 La Mpassa · Tous droits réservés · Design & Innovation</p>
+  <p style="color:var(--tc)">La Carte · Services · Innovation · Vision · Expansion</p>
+</div>
+
+</div>
+
+<script>
+function scrollTo(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+function filterMenu(cat, btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.menu-item').forEach(item=>{
+    if(cat==='all'||item.dataset.cat===cat){item.classList.remove('hidden')}
+    else{item.classList.add('hidden')}
+  });
+}
+
+function showPillar(id, btn){
+  document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.pillar-content').forEach(c=>c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('p-'+id).classList.add('active');
+}
+
+function setLang(lang, btn){
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.fr-text').forEach(el=>el.classList.toggle('show', lang==='fr'));
+  document.querySelectorAll('.en-text').forEach(el=>el.classList.toggle('show', lang==='en'));
+}
+</script>
