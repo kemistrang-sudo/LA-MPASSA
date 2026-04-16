@@ -458,10 +458,62 @@ function showPillar(id, btn){
   document.getElementById('p-'+id).classList.add('active');
 }
 
-function setLang(lang, btn){
-  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.fr-text').forEach(el=>el.classList.toggle('show', lang==='fr'));
-  document.querySelectorAll('.en-text').forEach(el=>el.classList.toggle('show', lang==='en'));
+<div class="menu-item" data-cat="africain">
+    <div class="menu-header">
+        <span class="menu-name">
+            <span class="fr-text show">Sanglier sauté dans son jus</span>
+            <span class="en-text">Sautéed Wild Boar in its gravy</span>
+        </span>
+        <span class="menu-price">6 500 FCFA</span>
+    </div>
+    <span class="pill pill-afr">
+        <span class="fr-text show">Africain</span>
+        <span class="en-text">African</span>
+    </span>
+</div>
+
+<div class="menu-item" data-cat="africain">
+    <div class="menu-header">
+        <span class="menu-name">
+            <span class="fr-text show">Gazelle sautée à l’odika</span>
+            <span class="en-text">Sautéed Gazelle with Odika sauce</span>
+        </span>
+        <span class="menu-price">6 000 FCFA</span>
+    </div>
+    <span class="pill pill-afr">
+        <span class="fr-text show">Africain</span>
+        <span class="en-text">African</span>
+    </span>
+</div>
+  function setLang(lang, btn) {
+    // 1. Gestion de l'état visuel des boutons
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    if(btn) btn.classList.add('active');
+
+    // 2. Basculement de TOUS les textes
+    const isEn = (lang === 'en');
+    
+    document.querySelectorAll('.fr-text').forEach(el => {
+        el.classList.toggle('show', !isEn);
+    });
+    
+    document.querySelectorAll('.en-text').forEach(el => {
+        el.classList.toggle('show', isEn);
+    });
+
+    // Optionnel : Sauvegarder le choix de l'utilisateur
+    localStorage.setItem('preferredLang', lang);
+}
+    </span>
+</div>
+  /* Cache par défaut les textes qui n'ont pas la classe .show */
+.fr-text, .en-text {
+    display: none;
+}
+
+/* Affiche uniquement le texte actif */
+.fr-text.show, .en-text.show {
+    display: inline; /* ou block selon le besoin */
+}
 }
 </script>
